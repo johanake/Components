@@ -1,0 +1,54 @@
+﻿<MudContainer Class="mt-4">
+    <!-- Top Bar for Search and Filter -->
+    <MudGrid Justify="Justify.Center">
+        <MudItem xs="8" md="8">
+            <MudTextField @bind-Value="SearchText" Placeholder="Search for an item..." Variant="Variant.Outlined" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Outlined.Search" Class="mr-4" Immediate="true" />
+        </MudItem>
+        <MudItem xs="8" md="4">
+            <MudSelect @bind-Value="SelectedFilter" Variant="Variant.Outlined" Label="Filter by category" Class="mr-4">
+                @foreach (var item in Categories)
+                {
+                    <MudSelectItem Value="@item">@item</MudSelectItem>
+                }
+            </MudSelect>
+        </MudItem>
+    </MudGrid>
+
+    <!-- Filtered and Searched Menu Items -->
+    <MudGrid Justify="Justify.Center">
+        @foreach (var item in FilteredMenuItems)
+        {
+            <OrderMenuItem Title="@item.Title" ImageUrl="@item.ImageUrl" Description="@item.Description" Price="@item.Price" />
+        }
+    </MudGrid>
+</MudContainer>
+
+@code {
+    private string SearchText { get; set; } = string.Empty;
+    private string SelectedFilter { get; set; } = "All";
+    public List<string> Categories { get; set; } = ["All", "Burgers", "Drinks", "Dessert"];
+
+    // Sample menu items
+    private List<MenuItem> MenuItems = new()
+    {
+        new MenuItem { Title = "Burger", Category = "Burgers", ImageUrl = "burger.jpg", Description = "Delicious cheeseburger", Price = "$5.99" },
+        new MenuItem { Title = "Fries", Category = "Burgers", ImageUrl = "fries.jpg", Description = "Crispy fries", Price = "$2.99" },
+        new MenuItem { Title = "Coke", Category = "Drinks", ImageUrl = "coke.jpg", Description = "Refreshing Coke", Price = "$1.99" },
+        new MenuItem { Title = "Ice Cream", Category = "Desserts", ImageUrl = "icecream.jpg", Description = "Creamy ice cream", Price = "$3.99" }
+    };
+
+    // Filtered menu items based on search and filter
+    private IEnumerable<MenuItem> FilteredMenuItems => MenuItems
+        .Where(item =>
+            (string.IsNullOrWhiteSpace(SearchText) || item.Title.Contains(SearchText, StringComparison.OrdinalIgnoreCase)) &&
+            (SelectedFilter == "All" || item.Category == SelectedFilter));
+
+    public class MenuItem
+    {
+        public string Title { get; set; } = "";
+        public string Category { get; set; } = "";
+        public string ImageUrl { get; set; } = "";
+        public string Description { get; set; } = "";
+        public string Price { get; set; } = "";
+    }
+}

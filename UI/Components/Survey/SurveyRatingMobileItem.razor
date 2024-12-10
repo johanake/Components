@@ -1,0 +1,22 @@
+﻿<MudPaper Elevation="2" Class="p-4 ma-2">
+    <MudGrid>
+        <MudItem xs="12">
+            <MudText Align="Align.Center" Typo="Typo.body1" Class="mb-4 mt-4" Style="font-weight: bold">
+                @Header
+            </MudText>
+        </MudItem>
+        <MudRadioGroup Class="d-flex justify-center align-center" @bind-Value="SelectedOption">
+            <MudRadio Value="@("Radio 1")" Color="Color.Primary">Never</MudRadio>
+            <MudRadio Value="@("Radio 2")" Color="Color.Primary">Not likely</MudRadio>
+            <MudRadio Value="@("Radio 3")" Color="Color.Primary">Maybe</MudRadio>
+            <MudRadio Value="@("Radio 4")" Color="Color.Primary">I could</MudRadio>
+            <MudRadio Value="@("Radio 5")" Color="Color.Primary">Of course!</MudRadio>
+        </MudRadioGroup>
+    </MudGrid>
+</MudPaper>
+
+@code {
+    [Parameter, EditorRequired]
+    public string Header { get; set; }
+    public string SelectedOption { get; set; }
+}

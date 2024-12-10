@@ -1,0 +1,56 @@
+﻿<MudContainer>
+    <MudDataGrid Items="@Elements" Filterable="true" FilterMode="@_filterMode" FilterCaseSensitivity="@_caseSensitivity"
+                 Class="mt-8">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Rooms</MudText>
+            <MudSpacer />
+            <MudTextField @bind-Value="_searchString" Placeholder="Search" Adornment="Adornment.Start" Immediate="true"
+                          AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+        </ToolBarContent>
+        <Columns>
+            <PropertyColumn Property="x => x.Number" Filterable="false" />
+            <PropertyColumn Property="x => x.Type" />
+            <PropertyColumn Property="x => x.State" />
+            <PropertyColumn Property="x => x.BookedUntil" Title="Booked Until" />
+            <PropertyColumn Property="x => x.Guest" Filterable="false" />
+            <TemplateColumn  CellClass="d-flex justify-end">
+                <CellTemplate>
+                    <MudStack Row>
+                        @if (string.IsNullOrEmpty(context.Item.Guest))
+                        {
+                            <MudButton Size="@Size.Small" Variant="@Variant.Filled" Color="@Color.Primary">Book</MudButton>
+                        }
+                        else
+                        {
+                            <MudButton Disabled="true" Size="@Size.Small" Variant="@Variant.Filled" Color="@Color.Primary">Book</MudButton>
+                        }
+                    </MudStack>
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+        <PagerContent>
+            <MudDataGridPager T="RoomItem" />
+        </PagerContent>
+    </MudDataGrid>
+</MudContainer>
+
+@code {
+    bool _fixedHeader = true;
+    DataGridFilterMode _filterMode = DataGridFilterMode.Simple;
+    DataGridFilterCaseSensitivity _caseSensitivity = DataGridFilterCaseSensitivity.Default;
+    private string _searchString;
+
+    private IEnumerable<RoomItem> Elements = new List<RoomItem>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Elements = [
+            new RoomItem("001", "Apartment", "Available", null, ""),
+            new RoomItem("002", "Apartment", "Available", null, ""),
+            new RoomItem("003", "Apartment", "Booked", DateTime.Now, "Johan Åkesson"),
+            new RoomItem("004", "Apartment", "Booked", DateTime.Now, "Lars Göransson")
+        ];
+    }
+
+    public record RoomItem(string Number, string Type, string State, DateTime? BookedUntil, string Guest);
+}

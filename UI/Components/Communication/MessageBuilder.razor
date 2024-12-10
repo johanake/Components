@@ -1,0 +1,52 @@
+﻿@using System.Diagnostics.SymbolStore
+<MudContainer>
+    <MudPaper>
+        <MudGrid Class="ms-8 mt-4 mb-4">
+            <MudItem xs="12">
+                <MudText Typo="Typo.h3" Class="ma-4">Check-in Message</MudText>
+            </MudItem>
+            <MudItem xs="12">
+                <MudDataGrid Style="width: 50%" Dense="true" @ref="dataGrid" Items="@Items">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h6">Message data</MudText>
+                        <MudSpacer/>
+                    </ToolBarContent>
+                    <Columns>
+                        <TemplateColumn CellClass="d-flex justify-start">
+                            <CellTemplate>
+                                <MudStack Row>
+                                    <MudButton OnClick="() => AddToText(context.Item.Value)" Size="@Size.Small" Variant="@Variant.Filled" Color="@Color.Primary">@context.Item.Value</MudButton>
+                                </MudStack>
+                            </CellTemplate>
+                        </TemplateColumn>
+                        <PropertyColumn Property="x => x.Description" Title="Description"/>
+                    </Columns>
+                </MudDataGrid>
+            </MudItem>
+        </MudGrid>
+        <MudTextField Class="ms-4 me-4" Placeholder="Your message..." Immediate="true" @bind-Value="_value" Variant="Variant.Text" AutoGrow Lines="12" />
+
+        <MudButton Color="Color.Secondary" Size="Size.Medium" Variant="Variant.Filled" Class="ma-4">Preview</MudButton>
+        <MudButton Color="Color.Primary" Size="Size.Medium" Variant="Variant.Filled" Class="ma-4">Submit</MudButton>    
+    </MudPaper>
+</MudContainer>
+
+@code {
+    IEnumerable<MessageBuilderValueItem> Items = new List<MessageBuilderValueItem>
+    {
+        new ("{{guest.firstName}}", "First name of the guest"),
+        new ("{{guest.lastName}}", "Last name of the guest"),
+        new ("{{hotel.name}}", "The name of your hotel"),
+        new ("{{hotel.address}}", "The address to your hotel"),
+    };
+
+    private string _value  { get; set; } = string.Empty;
+    MudDataGrid<MessageBuilderValueItem> dataGrid;
+    
+    private void AddToText(string value)
+    {
+        _value += value;
+    }
+    
+    public record MessageBuilderValueItem(string Value, string Description);
+}

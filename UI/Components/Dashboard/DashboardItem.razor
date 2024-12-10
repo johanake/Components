@@ -1,0 +1,17 @@
+﻿<MudItem xs="8" md="6">
+    <MudPaper Elevation="1" Square="false">
+        <MudText Align="Align.Center" Typo="Typo.h5" Class="mb-8">@Title</MudText>
+        <MudChart ChartType="ChartType.Pie" InputData="@Data" @bind-SelectedIndex="_index" InputLabels="@Labels" Width="150px" Height="150px"/>
+    </MudPaper>
+</MudItem>
+
+@code
+{
+    private int _index = -1; //default value cannot be 0 -> first selectedindex is 0.
+
+    [Parameter, EditorRequired] public string Title { get; set; }
+    [Parameter, EditorRequired]
+    public double[] Data { get; set; } = [];
+    [Parameter, EditorRequired]
+    public string[] Labels { get; set; } = [];
+}

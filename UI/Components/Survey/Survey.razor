@@ -1,0 +1,35 @@
+﻿<MudContainer Class="mt-12 p-4">
+    <MudPaper Style="background-image: linear-gradient(#FFFFFF, #B6DDFB)">
+        <MudGrid Justify="Justify.Center">
+            <MudItem xs="12">
+                <div class="d-flex flex-column">
+                    <MudText Align="Align.Center" Typo="Typo.h3" Class="ma-4">Your feedback is appreciated!</MudText>
+                    <MudText Align="Align.Center" Typo="Typo.body1" Class="ma-4">We hope you are enjoying your stay here with us!</MudText>
+                    <MudText Align="Align.Center" Typo="Typo.body1" Class="ma-4 m-8">
+                        In order to ensure you are having the time of your life, we would appreciate your feedback. If there are any issues or questions, you are always welcome to contact our receptionist.
+                    </MudText>
+                </div>
+            </MudItem>
+
+            <MudItem xs="8" Class="justify-center ma-8">
+                <SurveyRatingWebItem Header="How likely are you to recommend us to a friend?"/>
+            </MudItem>
+            <MudItem xs="8" Class="justify-center ma-8">
+                <SurveyMultiTextItem Header="What can we improve to make your stay better?" />
+            </MudItem>
+            
+            <MudItem xs="8" Class="justify-center ma-8">
+                <SurveyMultiTextItem Header="What is the best thing about your stay?" />
+            </MudItem>
+        </MudGrid>
+
+        <MudContainer Class="d-flex justify-center align-center">
+            <MudButton Size="Size.Large" Variant="Variant.Filled" Color="Color.Primary" Class="ma-4">Submit</MudButton>
+        </MudContainer>
+    </MudPaper>
+</MudContainer>
+
+@code {
+    private Breakpoint CurrentBreakpoint { get; set; } = Breakpoint.Md; // Default breakpoint
+
+}

@@ -1,0 +1,29 @@
+﻿<MudContainer>
+    <MudContainer Class="mt-4">
+        <MudGrid Justify="Justify.Center">
+            <DashboardItem Data="_roomsData" Labels="_roomsLabels" Title="Rooms"></DashboardItem>
+            <DashboardItem Data="_checkinData" Labels="_checkinLabels" Title="Check-in"></DashboardItem>
+            <DashboardItem Data="_ratingData" Labels="_ratingLabels" Title="Customer Ratings"></DashboardItem>
+            <DashboardItem Data="_surveyData" Labels="_surveyLabels" Title="Survey"></DashboardItem>
+        </MudGrid>
+    </MudContainer>
+</MudContainer>
+
+@code
+{
+    // rooms
+    double[] _roomsData = { 77, 25, 20};
+    string[] _roomsLabels = { "Booked", "Waiting for cleaning", "Not booked"};
+    
+    // check-ins
+    double[] _checkinData = { 12, 5, 1};
+    string[] _checkinLabels = { "Today", "Tomorrow", "Missed"};
+    
+    // customer rating
+    double[] _ratingData = { 24, 15, 20, 7, 2};
+    string[] _ratingLabels = { "5 stars", "4 stars", "3 stars", "2 stars", "1 star"};
+    
+    // survey
+    double[] _surveyData = { 80, 15, 5};
+    string[] _surveyLabels = { "Happy", "Want to book again", "Not happy"};
+}

@@ -1,0 +1,18 @@
+﻿<MudItem xs="8" md="4">
+    <MudPaper Class="d-flex flex-column align-center" Elevation="1" Square="false">
+        <div class="d-flex">
+            <MudText Align="Align.Center" Typo="Typo.h5" Class="mb-4 mt-4">@Title</MudText>
+            <MudText Align="Align.Justify" Typo="Typo.body1" Style="font-weight: bold; margin-right: 8px;">@Price</MudText>
+        </div>
+        <MudImage Fluid="true" Width="150" Height="150" Alt="@Title" Elevation="25" Class="rounded-lg ma-4" Src="https://www.foodandwine.com/thmb/DI29Houjc_ccAtFKly0BbVsusHc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/crispy-comte-cheesburgers-FT-RECIPE0921-6166c6552b7148e8a8561f7765ddf20b.jpg"></MudImage>
+        <MudText Align="Align.Center" Typo="Typo.body2">@Description</MudText>
+        <MudButton Class="mb-4 mt-8" Variant="Variant.Filled" ButtonType="ButtonType.Submit" Color="Color.Primary">Add to cart</MudButton>
+    </MudPaper>
+</MudItem>
+
+@code {
+    [Parameter] public string Title { get; set; } = string.Empty;
+    [Parameter] public string ImageUrl { get; set; } = "https://www.foodandwine.com/thmb/DI29Houjc_ccAtFKly0BbVsusHc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/crispy-comte-cheesburgers-FT-RECIPE0921-6166c6552b7148e8a8561f7765ddf20b.jpg";
+    [Parameter] public string Description { get; set; } = string.Empty;
+    [Parameter] public string Price { get; set; } = string.Empty;
+}

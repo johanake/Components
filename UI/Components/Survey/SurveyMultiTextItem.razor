@@ -1,0 +1,16 @@
+﻿<MudPaper Elevation="2" Class="p-4 ma-2">
+    <MudGrid>
+        <MudItem xs="12">
+            <MudText Align="Align.Center" Typo="Typo.body1" Class="mb-4 mt-4" Style="font-weight: bold">
+                @Header
+            </MudText>
+            <MudTextField Class="ms-4 me-4" bind-Text="@_value" T="string" Placeholder="Your message..." Variant="Variant.Text" AutoGrow Lines="3" />
+        </MudItem>
+    </MudGrid>
+</MudPaper>
+@code {
+    [Parameter, EditorRequired]
+    public string Header { get; set; }
+    private string _value  { get; set; }
+
+}
